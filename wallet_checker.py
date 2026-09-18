@@ -1,3 +1,4 @@
+"""validate bitcoin and etherum wallet wallet addresses."""
 import re
 
 def check_ethereum(address):
