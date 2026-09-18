@@ -1,15 +1,20 @@
-"""Validate Bitcoin and Ethereum wallet addresses."""
+"""Utilities for validating Bitcoin and Ethereum wallet addresses."""
+
 import re
 
 
 def check_ethereum(address):
-    """Return True if the given string is a valid Ethereum wallet address.
+    """Return whether the input matches the Ethereum wallet address format.
+
+    Ethereum addresses are 40-character hexadecimal values prefixed with ``0x``.
+    The comparison is case-insensitive for the hexadecimal characters.
 
     Args:
-        address (str): The wallet address to validate.
+        address (str): Wallet address to validate.
 
     Returns:
-        bool: True if the address matches the Ethereum format, otherwise False.
+        bool: ``True`` if the value is a valid Ethereum-style address, otherwise
+        ``False``.
     """
     if not isinstance(address, str):
         return False
@@ -19,13 +24,17 @@ def check_ethereum(address):
 
 
 def check_bitcoin(address):
-    """Return True if the given string is a valid Bitcoin wallet address.
+    """Return whether the input matches the Bitcoin wallet address format.
+
+    Supported Bitcoin formats include legacy addresses beginning with ``1`` or
+    ``3`` and SegWit addresses beginning with ``bc1``.
 
     Args:
-        address (str): The wallet address to validate.
+        address (str): Wallet address to validate.
 
     Returns:
-        bool: True if the address matches the Bitcoin format, otherwise False.
+        bool: ``True`` if the value is a valid Bitcoin-style address, otherwise
+        ``False``.
     """
     if not isinstance(address, str):
         return False
@@ -35,7 +44,12 @@ def check_bitcoin(address):
 
 
 def main():
-    """Prompt for a wallet address and print whether it is valid."""
+    """Prompt the user for a wallet address and print its validation result.
+
+    Reads the value from standard input, strips surrounding whitespace, checks it
+    against the supported Ethereum and Bitcoin address patterns, and prints a
+    human-readable result.
+    """
     wallet = input("Enter wallet address: ").strip()
 
     if check_ethereum(wallet):
