@@ -25,3 +25,6 @@ jobs:
 
       - name: Run Pylint
         run: python -m pylint --disable=R,C *.py
+      - name: Analyse the code with pylint
+  run: |
+    pylint --disable=C $(git ls-files '*.py')  
