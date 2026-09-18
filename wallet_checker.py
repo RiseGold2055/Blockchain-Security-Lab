@@ -11,8 +11,11 @@ def check_ethereum(address):
     Returns:
         bool: True if the address matches the Ethereum format, otherwise False.
     """
-    pattern = r"^0x[a-fA-F0-9]{40}$"
-    return bool(re.match(pattern, address))
+    if not isinstance(address, str):
+        return False
+
+    pattern = r"0x[a-fA-F0-9]{40}"
+    return bool(re.fullmatch(pattern, address))
 
 
 def check_bitcoin(address):
@@ -24,8 +27,11 @@ def check_bitcoin(address):
     Returns:
         bool: True if the address matches the Bitcoin format, otherwise False.
     """
-    pattern = r"^(bc1|[13])[a-km-zA-HJ-NP-Z1-9]{25,62}$"
-    return bool(re.match(pattern, address))
+    if not isinstance(address, str):
+        return False
+
+    pattern = r"(?:bc1|[13])[a-km-zA-HJ-NP-Z1-9]{25,62}"
+    return bool(re.fullmatch(pattern, address))
 
 
 def main():
